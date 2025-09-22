@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { TextField, Button, Box, Typography, Paper } from "@mui/material";
 import api from '../utils/api';
+import { replace, useNavigate } from "react-router-dom";
 
 function LoginPage() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
+    const navigate = useNavigate();
 
     const handleLogin = async () => {
         try{
@@ -16,7 +18,7 @@ function LoginPage() {
 
             // Save JWT in localStorage
             localStorage.setItem("token", response.data.access_token);
-            window.location.href = "/dashboard";
+            navigate("/dashboard", {"replace": true});
         } catch (err) {
             setError("Invalid username or password");
             setUsername("");
