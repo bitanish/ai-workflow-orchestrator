@@ -20,12 +20,23 @@ A **multi-agent orchestration platform** built using **CrewAI** and **LangChain*
 ```bash
 ai-workflow-orchestrator/
 │
-├── backend/               # FastAPI backend (deployed on ECS)
-├── frontend/              # React dashboard (served via S3 + CloudFront)
-├── agents/                # Role-specific agent definitions (Researcher, Planner, Writer)
-├── workflows/             # CrewAI orchestration scripts
-├── docs/                  # Documentation and architecture diagrams
-└── README.md              # Project overview
+├── backend/
+│   ├── app/
+│   │   ├── models/          # Database models
+│   │   ├── orchestrator/    # CrewAI orchestration logic
+│   │   ├── routes/          # FastAPI routes (APIs)
+│   │   ├── utils/           # Utility functions
+│   │   ├── db.py            # Database configuration
+│   │   └── main.py          # FastAPI entrypoint
+│   ├── Dockerfile
+│   ├── requirements.txt
+│   ├── package.json
+│   └── package-lock.json
+│
+├── frontend/                # React dashboard (served via S3 + CloudFront)
+├── docker-compose.yml       # Local orchestration
+├── README.md
+└── .gitignore
 ```
 
 ---
@@ -73,6 +84,12 @@ uvicorn app.main:app --reload
 cd frontend
 npm install
 npm start
+```
+
+### 4. Local Orchestration (Docker Compose)
+
+```bash
+docker-compose up --build
 ```
 
 ---
